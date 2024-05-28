@@ -3,54 +3,41 @@ const addEmployeesBtn = document.querySelector('#add-employees-btn');
 
 // Collect employee data
 const collectEmployees = function() {
-  // TODO: Get user input to create and return an array of employee objects
   const employees = [];  
 
   while (true) {
+    let firstName = window.prompt("Enter First Name");
+    let lastName = window.prompt("Enter Last Name");
+    let salary = window.prompt("Enter Employee Salary");
 
-  // Ask for first name
-  let firstName = window.prompt("Enter First Name");
-  console.log(firstName);
-  
-  // Ask for last name
-  let lastName = window.prompt("Enter Last Name");
-  console.log(lastName);
-  // Ask for Salary
-  let salary = window.prompt("Enter Employee Salary");
-  console.log(salary)
-  // Add info to array as object
-    employees.push(employees);
-  // Ask another employee Yes return No Cancel 
-  const addAnother = window.confirm("Would you like to add another employee?");
-  if (!addAnother) {
-    break;
+    // Add info to array as object
+    employees.push({firstName, lastName, salary});
+
+    const addAnother = window.confirm("Would you like to add another employee?");
+    if (!addAnother) {
+      break;
+    }
   }
-  }
+
+  return employees;
 }
-  // return array
-
-
- 
 
 // Display the average salary
 const displayAverageSalary = function(employeesArray) {
-  // TODO: Calculate and display the average salary
+  let totalSalary = 0;
+  for(let i = 0; i < employeesArray.length; i++) {
+    totalSalary += Number(employeesArray[i].salary);
+  }
+  let averageSalary = totalSalary / employeesArray.length;
+  console.log(`Average Salary: ${averageSalary}`);
 }
 
 // Select a random employee
 const getRandomEmployee = function(employeesArray) {
-  // TODO: Select and display a random employee
+  let randomIndex = Math.floor(Math.random() * employeesArray.length);
+  let randomEmployee = employeesArray[randomIndex];
+  console.log(`Random Employee: ${randomEmployee.firstName} ${randomEmployee.lastName}`);
 }
-
-
-
-
-
-
-
-
-
-
 /*
   ====================
   STARTER CODE
@@ -109,6 +96,11 @@ const trackEmployeeData = function() {
     } else {
       return 1;
     }
+  });
+
+  // Convert salary to number
+  employees.forEach(function(employee) {
+    employee.salary = Number(employee.salary);
   });
 
   displayEmployees(employees);
